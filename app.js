@@ -133,6 +133,7 @@ app.get("/home", (req, res) => {
 
 // Catch-all 404 handler (no `*`)
 function handleNotFound(req, res, next) {
+  console.log("404 on:", req.method, req.originalUrl);
   next(new ExpressError(404, "Page not Found !"));
 }
 app.use(handleNotFound);
