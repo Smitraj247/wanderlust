@@ -40,13 +40,19 @@ const PORT = process.env.PORT || 8080;
 connectDB();
 
 // CORS — must be registered before routes                    // ADD THIS BLOCK
+const cors = require("cors");
+
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://wanderlust-oe6v.vercel.app",
+];
+
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: allowedOrigins,
     credentials: true,
   }),
 );
-
 // View engine setup
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
