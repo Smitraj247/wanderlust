@@ -89,6 +89,13 @@ app.get("/home", (req, res) => {
   res.send("Home Page");
 });
 
+app.get("/", (req, res) => {
+  res.json({
+    success: true,
+    message: "Backend is running!",
+  });
+});
+
 // Error handlers
 app.use(handleNotFound);
 app.use(errorHandler);
