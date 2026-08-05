@@ -40,7 +40,6 @@ const PORT = process.env.PORT || 8080;
 connectDB();
 
 // CORS — must be registered before routes                    // ADD THIS BLOCK
-const cors = require("cors");
 
 const allowedOrigins = [
   "http://localhost:3000",
@@ -49,7 +48,13 @@ const allowedOrigins = [
 
 app.use(
   cors({
-    origin: allowedOrigins,
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
   }),
 );
