@@ -12,4 +12,4 @@ router.get("/logout", userController.logout);
 
 router.get("/user/me", isLoggedIn, userController.getCurrentUser);
 
-module.exports = router;
+module.exports = router; 

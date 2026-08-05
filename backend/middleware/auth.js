@@ -1,8 +1,10 @@
 const isLoggedIn = (req, res, next) => {
   if (!req.isAuthenticated()) {
     req.session.redirectUrl = req.originalUrl;
-    req.flash("error", "you must be logged in to create listing!");
-    return res.redirect("/login");
+    return res.status(401).json({
+      success: false,
+      message: "You must be logged in to do that.",
+    });
   }
   next();
 };
@@ -16,12 +18,16 @@ const saveRedirectUrl = (req, res, next) => {
 
 const isAdmin = (req, res, next) => {
   if (!req.isAuthenticated()) {
-    req.flash("error", "You must be logged in to access the admin panel.");
-    return res.redirect("/login");
+    return res.status(401).json({
+      success: false,
+      message: "You must be logged in to access the admin panel.",
+    });
   }
   if (!req.user.isAdmin) {
-    req.flash("error", "You do not have permission to access the admin panel.");
-    return res.redirect("/listings");
+    return res.status(403).json({
+      success: false,
+      message: "You do not have permission to access the admin panel.",
+    });
   }
   next();
 };
