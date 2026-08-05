@@ -4,7 +4,7 @@ if (process.env.NODE_ENV != "production") {
 
 const express = require("express");
 const app = express();
-const cors = require("cors");                 // ADD THIS
+const cors = require("cors"); // ADD THIS
 const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
@@ -14,10 +14,16 @@ const passport = require("passport");
 // Config imports
 const connectDB = require("./config/db.js");
 const configurePassport = require("./config/passport.js");
-const { createSessionStore, getSessionOptions } = require("./config/session.js");
+const {
+  createSessionStore,
+  getSessionOptions,
+} = require("./config/session.js");
 
 // Middleware imports
-const { handleNotFound, errorHandler } = require("./middleware/errorHandler.js");
+const {
+  handleNotFound,
+  errorHandler,
+} = require("./middleware/errorHandler.js");
 
 // Route imports
 const listingRouter = require("./routes/listing.routes.js");
@@ -34,17 +40,16 @@ const PORT = process.env.PORT || 8080;
 connectDB();
 
 // CORS — must be registered before routes                    // ADD THIS BLOCK
-app.use(cors({
-  origin: "http://localhost:3000",
-  credentials: true,
-}));
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+  }),
+);
 
 // View engine setup
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "../views"));
-app.engine("ejs", ejsMate);
 
 // Middleware
 app.use(express.urlencoded({ extended: true }));

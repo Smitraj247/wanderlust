@@ -8,11 +8,13 @@ logs/
 
 # Environment variables
 backend/.env
+
 .env
 .env.*
 !.env.example
 
 # Dependencies
+backend/node_modules
 node_modules/
 vendor/
 
